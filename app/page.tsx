@@ -13,7 +13,7 @@ export default function Home() {
 
            <p>3) After that a chat interface will be open and you can ask the question based on the provided website.</p>
 
-           <p>4) Don't try to many times.This built on top of free tier from upstash.</p>
+           <p>4) Don&apos;t try to many times.This built on top of free tier from upstash.</p>
 
            <p>5) Only for project showcasing.</p>
        </div>
