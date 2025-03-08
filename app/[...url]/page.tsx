@@ -20,13 +20,15 @@ export default async function Page({ params } : PageProps) {
 
     const resolvedParams = await params;
 
-    if(!(resolvedParams.url)?.includes("http") || !resolvedParams.url.includes("https") ){
-            redirect("/")
-    }
+
 
     const cookieStore = await cookies();
 
   const reconstructedUrl =  reconstructUrl(resolvedParams.url as string[]);
+
+  if(!reconstructedUrl.startsWith("http") || !reconstructedUrl.startsWith("https")){
+      redirect("/")
+  }
     const sessionCookie = cookieStore.get("sessionId")?.value;
 
 
