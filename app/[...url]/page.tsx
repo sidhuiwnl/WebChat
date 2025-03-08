@@ -2,6 +2,7 @@ import {ragChat} from "@/lib/rag-chat";
 import {redis} from "@/lib/redis";
 import ChatWrapper from "@/components/ChatWrapper";
 import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 
 interface PageProps {
     params : {
@@ -16,8 +17,14 @@ function reconstructUrl(url : string[]){
     return decodedComponent.join("/")
 }
 
+
 export default async function Page({ params } : PageProps) {
-    const cookieStore = await cookies()
+
+    if(!(params.url)?.includes("http") || !params.url.includes("https") ){
+            redirect("/")
+    }
+
+    const cookieStore = await cookies();
 
   const reconstructedUrl =  reconstructUrl(params.url as string[]);
     const sessionCookie = cookieStore.get("sessionId")?.value;

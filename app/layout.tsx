@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(geistMono.className,"min-h-screen antialiased ")}
+        className={cn(geistSans.className,"min-h-screen antialiased ")}
       >
       <main className="h-screen dark text-foreground bg-background">
           {children}
