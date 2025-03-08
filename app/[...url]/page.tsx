@@ -5,9 +5,7 @@ import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
 
 interface PageProps {
-    params : {
-        url : string | string[] | undefined,
-    }
+    params : Promise<{ url? : string[]}>
 }
 
 
@@ -20,13 +18,15 @@ function reconstructUrl(url : string[]){
 
 export default async function Page({ params } : PageProps) {
 
-    if(!(params.url)?.includes("http") || !params.url.includes("https") ){
+    const resolvedParams = await params;
+
+    if(!(resolvedParams.url)?.includes("http") || !resolvedParams.url.includes("https") ){
             redirect("/")
     }
 
     const cookieStore = await cookies();
 
-  const reconstructedUrl =  reconstructUrl(params.url as string[]);
+  const reconstructedUrl =  reconstructUrl(resolvedParams.url as string[]);
     const sessionCookie = cookieStore.get("sessionId")?.value;
 
 
